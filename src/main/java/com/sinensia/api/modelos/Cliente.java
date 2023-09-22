@@ -1,15 +1,21 @@
 package com.sinensia.api.modelos;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
+import jakarta.validation.constraints.Email;
 
 /**
  * Esta clase representa a un cliente de la empresa.
  * 
  */
+
 @Entity
+@Table(name = "clientes", uniqueConstraints = { @UniqueConstraint(columnNames = { "email" }) })
 public class Cliente {
     // Esta anotación indica que esta clase es una entidad JPA.
 
@@ -18,6 +24,9 @@ public class Cliente {
     private Long id; // El campo id se generará automáticamente.
 
     private String nombre;
+
+    @Email
+    @Column(unique = true)
     private String email;
 
     public Long getId() {
@@ -44,10 +53,4 @@ public class Cliente {
         this.email = email;
     }
 
-    // Constructores, getters y setters (omitiendo por brevedad).
-
-    // Aquí puedes agregar métodos adicionales según tus necesidades.
-
-    // Getters y setters para id, nombre y email (generados automáticamente o
-    // definidos por ti).
 }
